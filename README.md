@@ -9,5 +9,6 @@ The modified driver is, in my opinion, rock solid (or so several weeks of use wo
 
 Note that `build.sh` does not replace the kernel driver file, it just builds one.  To change which module file is loaded, you'll want to compress the `hid-logitech-hidpp.ko` file using `zstd`, and move the resulting `hid-logitech-hidpp.ko.zst` file to the <code>/lib/modules/\`uname -r\`/kernel/drivers/hid</code>[^2] directory.
 
+For futher information, see [https://www.kernel.org/doc/Documentation/kbuild/modules.txt](https://www.kernel.org/doc/Documentation/kbuild/modules.txt "kbuild documentation")
 [^1]: N.B.: I have not tested with any mouse except the MX Master 3.
 [^2]: `uname -r` is a shell command that outputs the release of the currently running kernel, e.g. 5.17.5-arch1-1.
