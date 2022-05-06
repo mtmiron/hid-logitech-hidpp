@@ -6,16 +6,15 @@ When using the stock kernel driver, as provided by Logitech, the mouse wheel of 
 
 ## Compiling
 Clone this repository and build the module:
-> ```
-> git clone https://github.com/mtmiron/hid-logitech-hidpp
-> cd hid-logitech-hidpp
-> make
-> ```
+```
+git clone https://github.com/mtmiron/hid-logitech-hidpp
+cd hid-logitech-hidpp
+make
+```
 
 The help and clean targets are also available:
-> ```
-> make help
->
+```
+make help
 > make -C /lib/modules/`uname -r`/build M=$PWD help
 > make[1]: Entering directory '/usr/lib/modules/5.17.5-arch1-1/build'
 >   Building external modules.
@@ -27,5 +26,6 @@ The help and clean targets are also available:
 >
 > make[1]: Leaving directory '/usr/lib/modules/5.17.5-arch1-1/build'
 ```
+
 
 For further information, see [https://www.kernel.org/doc/Documentation/kbuild/modules.txt](https://www.kernel.org/doc/Documentation/kbuild/modules.txt "kbuild documentation")
