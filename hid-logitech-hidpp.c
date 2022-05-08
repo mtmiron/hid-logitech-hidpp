@@ -475,22 +475,51 @@ static void hidpp_scroll_counter_handle_scroll(struct input_dev *input_dev,
 	int low_res_value, remainder, direction;
 	unsigned long long now, previous;
 
-	hi_res_value = hi_res_value * 120/counter->wheel_multiplier;
-	input_report_rel(input_dev, REL_WHEEL_HI_RES, hi_res_value);
-
+	//hi_res_value = hi_res_value * 120/counter->wheel_multiplier;
+	//hi_res_value = hi_res_value;
+	//input_report_rel(input_dev, REL_WHEEL_HI_RES, hi_res_value);
 	remainder = counter->remainder;
 	direction = hi_res_value > 0 ? 1 : -1;
 
 	now = sched_clock();
 	previous = counter->last_time;
 	counter->last_time = now;
+	remainder += hi_res_value;
+	if (abs(remainder) / 20 > 0) {
+		input_report_rel(input_dev, REL_WHEEL, direction);
+		counter->remainder = 0;
+	} else {
+		if (counter->direction != direction)
+			counter->remainder = hi_res_value;
+		else
+			counter->remainder += remainder;
+	}
+	counter->direction = direction;
+		//if (counter->direction != direction)
+//			counter->remainder = 0;
+//		else
+//			counter->remainder = remainder;
+//	}
+	return;
+	if (now - previous < 500000000)
+		return;
+	direction = hi_res_value < 0 ? -1 : 1;
+	input_report_rel(input_dev, REL_WHEEL, direction);//hi_res_value / 100 + direction);
+	return;
+	if (abs(hi_res_value / 4) > 0)
+		input_report_rel(input_dev, REL_WHEEL, hi_res_value / 4);
+	else
+		remainder = hi_res_value;
+	//printk(KERN_ERR "at time %lld: %d", now - previous, hi_res_value);
+	return;
 	/*
 	 * Reset the remainder after a period of inactivity or when the
 	 * direction changes. This prevents the REL_WHEEL emulation point
 	 * from sliding for devices that don't always provide the same
 	 * number of movements per detent.
 	 */
-	if (now - previous > 1000000000)// || direction != counter->direction)
+	//if (now - previous > 1000000000)// || direction != counter->direction)
+	if (now - previous > 1000000000 || ((now - previous > 1000) && direction != counter->direction))
 		remainder = 0;
 
 	counter->direction = direction;
@@ -510,7 +539,7 @@ static void hidpp_scroll_counter_handle_scroll(struct input_dev *input_dev,
 		low_res_value = remainder / 120;
 		if (low_res_value == 0)
 			low_res_value = (hi_res_value > 0 ? 1 : -1);
-		input_report_rel(input_dev, REL_WHEEL, low_res_value);
+		//input_report_rel(input_dev, REL_WHEEL, low_res_value);
 		remainder -= low_res_value * 120;
 	}
 	counter->remainder = remainder;
