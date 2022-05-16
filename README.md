@@ -13,7 +13,7 @@ event moves around. This is worked around by directional resets and a
 timeout-based reset.
 ```
 
-I've noticed no "drifting" of the relative wheel motion being reported (nor, to be frank, do I understand how a relative motion can have a fixed point in order for that point to drift at all).  YMMV.
+I've noticed no "drifting" of the relative wheel motion being reported; nor, to be frank, do I understand how the fixed point that a motion is defined in relation to is even relevant in this context, but again, I've seen no problems with removing the work around and treating all events as motion relative to "some point that nobody cares about and that is safe to ignore."  YMMV.
 
 
 ## Compiling
