@@ -1,4 +1,4 @@
-# Logitech MX Master 3 mouse in Arch Linux
+# Logitech MX Master 3 mouse in Linux
 This is a quick-and-dirty setup to build the hid-logitech-hidpp driver, which is used by the Logitech MX Master 3 wireless mouse.  It's built as an out-of-tree module.
 
 ## Why? (aka "The problem")
