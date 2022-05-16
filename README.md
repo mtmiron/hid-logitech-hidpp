@@ -44,3 +44,12 @@ For further information, see [https://www.kernel.org/doc/Documentation/kbuild/mo
 
 ## Installing
 Personally I just deleted the stock "hid-logitech-hidpp.ko.zst" file from my Linux kernel module directory, and now it automatically loads my version instead after running "make modules_install" using the Makefile provided herein.  The modified driver goes into the "extras" directory along with any other out-of-tree modules.  Please note that I am not committing to maintaining this driver in the future, but I do intend to keep it working for as long as I happen to use this mouse with my day-to-day setup.
+
+## Errata
+Note that your Linux kernel must have been built with loadable module support compiled in, and that the hid-loogitech-hidpp driver must have been configured as a loadable module and not a compiled-in driver (the vast majority of Linux distributions make almost everything a module in order to support the widest range of hardware possible).  Note also that just deleting the module file and installing a new one will not change the running kernel.  If you want to use the new driver without a reboot, after deleting the old one and installing the new one (`make modules_install` will require root privileges, of course), at a command prompt run this:
+
+```
+sudo rmmod hid-logitech-hidpp && sudo modprobe hid-logitech-hidpp
+```
+
+Leave out `sudo` if you're logged in as root or otherwise don't need superuser permissions (but you almost certainly will).  That will unload the running module, and then load the modified version.  No reboot necessary.
