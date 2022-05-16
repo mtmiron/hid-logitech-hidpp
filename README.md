@@ -41,3 +41,6 @@ make help
 
 
 For further information, see [https://www.kernel.org/doc/Documentation/kbuild/modules.txt](https://www.kernel.org/doc/Documentation/kbuild/modules.txt "kbuild documentation")
+
+## Installing
+Personally I just deleted the stock "hid-logitech-hidpp.ko.zst" file from my Linux kernel module directory, and now it automatically loads my version instead after running "make modules_install" using the Makefile provided herein.  The modified driver goes into the "extras" directory along with any other out-of-tree modules.  Please note that I am not committing to maintaining this driver in the future, but I do intend to keep it working for as long as I happen to use this mouse with my day-to-day setup.
