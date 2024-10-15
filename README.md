@@ -52,4 +52,8 @@ Note that your Linux kernel must have been built with loadable module support co
 sudo rmmod hid-logitech-hidpp && sudo modprobe hid-logitech-hidpp
 ```
 
-Leave out `sudo` if you're logged in as root or otherwise don't need superuser permissions (but you almost certainly will).  That will unload the running module, and then load the modified version.  No reboot necessary.
+Leave out `sudo` if you're logged in as root or otherwise don't need superuser permissions (but you almost certainly will).  That will unload the running module, and then load the modified version.  Note that if the driver is included in your initial RAM disk, you'll likely have to also run:
+
+```
+sudo update-initramfs -u
+```
